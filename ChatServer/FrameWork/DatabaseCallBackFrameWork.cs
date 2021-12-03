@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static ChatServer.Server.Queue.DatabaseCallBack;
 
 namespace ChatServer.FrameWork
 {
@@ -12,17 +9,22 @@ namespace ChatServer.FrameWork
 
         protected override void BeginWork()
         {
-            throw new NotImplementedException();
+            ;
         }
 
         protected override void EndWork()
         {
-            throw new NotImplementedException();
+            ;
         }
 
         protected override void MainWorkImpl()
         {
-            throw new NotImplementedException();
+            var queue = ThreadQueue<CallBack>.Instance.GetQueue();
+            while (0 != queue.Count)
+            {
+                var top = queue.Dequeue();
+                top.Invoke();
+            }
         }
     }
 }

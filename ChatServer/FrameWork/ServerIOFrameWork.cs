@@ -15,17 +15,17 @@ namespace ChatServer.FrameWork
 
         protected override void BeginWork()
         {
-            throw new NotImplementedException();
+            AsynchronousSocketListener.StartListening();
         }
 
         protected override void EndWork()
         {
-            throw new NotImplementedException();
+            ;
         }
 
         protected override void MainWorkImpl()
         {
-            throw new NotImplementedException();
+            ;
         }
 
         // State object for reading client data asynchronously  
@@ -48,6 +48,16 @@ namespace ChatServer.FrameWork
         {
             // Thread signal.  
             public static ManualResetEvent allDone = new ManualResetEvent(false);
+            private static List<StateObject> _StateObjectList = new List<StateObject>();
+            private readonly object _Mutex = new object();
+
+            public List<StateObject> GetStateObject()
+            {
+                lock(_Mutex)
+                {
+                    return _StateObjectList;
+                }
+            }
 
             public AsynchronousSocketListener()
             {
@@ -110,6 +120,8 @@ namespace ChatServer.FrameWork
                 // Create the state object.  
                 StateObject state = new StateObject();
                 state.workSocket = handler;
+                _StateObjectList.Add(state);
+
                 handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
                     new AsyncCallback(ReadCallback), state);
             }
@@ -184,4 +196,5 @@ namespace ChatServer.FrameWork
                 }
             }
         }
+    }
 }

@@ -66,19 +66,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO\BaseDAO.cs" />
+    <Compile Include="DAO\MessageDAO.cs" />
+    <Compile Include="DAO\UserDAO.cs" />
     <Compile Include="Database\DatabaseController.cs" />
+    <Compile Include="DTO\Message.cs" />
+    <Compile Include="DTO\User.cs" />
+    <Compile Include="FrameWork\DatabaseCallBackFrameWork.cs" />
+    <Compile Include="FrameWork\DatabaseFrameWork.cs" />
+    <Compile Include="FrameWork\FrameWork.cs" />
+    <Compile Include="FrameWork\PacketRecieveFrameWork.cs" />
+    <Compile Include="FrameWork\ServerIOFrameWork.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Server\ThreadQueue.cs" />
+    <Compile Include="Server\Component\IMessage.cs" />
+    <Compile Include="Server\Component\IUser.cs" />
+    <Compile Include="Server\Component\MessageComponent.cs" />
+    <Compile Include="Server\Component\UserComponent.cs" />
+    <Compile Include="Server\Packet\Packet.cs" />
+    <Compile Include="Server\Packet\PacketGenerator.cs" />
+    <Compile Include="Server\Packet\PacketReader.cs" />
+    <Compile Include="Server\Queue\DatabaseCallBack.cs" />
+    <Compile Include="Server\Queue\PacketInfo.cs" />
+    <Compile Include="Server\Queue\ThreadQueue.cs" />
+    <Compile Include="Utils\Singleton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DAO\" />
-    <Folder Include="DTO\" />
-    <Folder Include="Utils\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

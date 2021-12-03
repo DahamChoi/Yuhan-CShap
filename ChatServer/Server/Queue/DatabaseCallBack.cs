@@ -8,5 +8,13 @@ namespace ChatServer.Server.Queue
 {
     class DatabaseCallBack
     {
+        public delegate void CallBack();
+
+        public CallBack _CallBack;
+
+        public DatabaseCallBack(CallBack callBack)
+        {
+            _CallBack = callBack;
+        }
     }
 }
