@@ -85,7 +85,6 @@
     <Compile Include="Server\Component\UserComponent.cs" />
     <Compile Include="Server\Packet\Packet.cs" />
     <Compile Include="Server\Packet\PacketGenerator.cs" />
-    <Compile Include="Server\Packet\PacketReader.cs" />
     <Compile Include="Server\Queue\DatabaseCallBack.cs" />
     <Compile Include="Server\Queue\PacketInfo.cs" />
     <Compile Include="Server\Queue\ThreadQueue.cs" />

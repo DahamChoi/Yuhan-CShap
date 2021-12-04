@@ -12,18 +12,33 @@ namespace ChatServer.Server.Packet
      *  
      * SignUpPacket
      *  -> SignUp;{id};{password};{nickname};
+     *  
+     *  SignUpSuccessPacket
+     *  -> SignUpSuccess;
      * 
      * LoginPacket
      *  -> Login;{id};{password};
      * 
+     * LoginSuccessPacket
+     *  -> LoginSuccess;
+     *  
+     *  LoginFailPacket
+     *   -> LoginFail;
+     * 
      * SendMessage
      *  -> SendMessage;{nickname};{content};
+     * 
+     * SendMessageSuccess
+     *  -> SendMessageSuccess;
      * 
      * ReceiveMessage
      *  -> ReceiveMessage;{nickname};{content};
      * 
      * GetMessage
      *  -> GetMessage;{from};{to};
+     * 
+     * GetMessageSuccess
+     *  -> GetMessageSuccess;{size};[{nickname},{content},{date}];
      * 
      */
 

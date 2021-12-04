@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using static ChatServer.FrameWork.ServerIOFrameWork;
 
 namespace ChatServer.Server.Component
 {
@@ -15,17 +16,29 @@ namespace ChatServer.Server.Component
         {
             MessageDAO.SelectMessage(from, to, (List<Message> result) =>
             {
-
+                // Not Impl
             },
             (string error) =>
             {
-
+                Console.WriteLine(error);
             });
         }
 
         public void SendMessage(Socket hanlder, string nickname, string content)
         {
-            throw new NotImplementedException();
+            MessageDAO.InsertMessage(nickname, content, () =>
+            {
+                var socketList = AsynchronousSocketListener.GetStateObject();
+                foreach(var socket in socketList)
+                {
+                    string packet = $"ReceiveMessage;{nickname};{content};";
+                    AsynchronousSocketListener.Send(socket.workSocket, packet);
+                }
+            },
+            (string error) =>
+            {
+                Console.WriteLine(error);
+            });
         }
     }
 }

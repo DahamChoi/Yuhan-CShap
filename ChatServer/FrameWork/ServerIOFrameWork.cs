@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ChatServer.Server.Component;
+using ChatServer.Server.Queue;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -49,9 +51,9 @@ namespace ChatServer.FrameWork
             // Thread signal.  
             public static ManualResetEvent allDone = new ManualResetEvent(false);
             private static List<StateObject> _StateObjectList = new List<StateObject>();
-            private readonly object _Mutex = new object();
+            private static readonly object _Mutex = new object();
 
-            public List<StateObject> GetStateObject()
+            public static List<StateObject> GetStateObject()
             {
                 lock(_Mutex)
                 {
@@ -149,12 +151,14 @@ namespace ChatServer.FrameWork
                     content = state.sb.ToString();
                     if (content.IndexOf("<EOF>") > -1)
                     {
+                        ThreadQueue<PacketInfo>.Instance.InsertQueue(new PacketInfo(state, content));
+
                         // All the data has been read from the
                         // client. Display it on the console.  
                         Console.WriteLine("Read {0} bytes from socket. \n Data : {1}",
                             content.Length, content);
                         // Echo the data back to the client.  
-                        Send(handler, content);
+                        // Send(handler, content);
                     }
                     else
                     {
@@ -165,7 +169,7 @@ namespace ChatServer.FrameWork
                 }
             }
 
-            private static void Send(Socket handler, String data)
+            public static void Send(Socket handler, String data)
             {
                 // Convert the string data to byte data using ASCII encoding.  
                 byte[] byteData = Encoding.ASCII.GetBytes(data);
