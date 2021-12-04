@@ -18,12 +18,12 @@ namespace ChatServer.Server.Component
             {
                 if(result.Count == 0)
                 {
-                    string failPacket = "LoginFail;";
+                    string failPacket = "LoginFail;<EOF>";
                     AsynchronousSocketListener.Send(handler, failPacket);
                     return;
                 }
 
-                string packet = "LoginSuccess;";
+                string packet = $"LoginSuccess;{result[0]._Nickname};<EOF>";
                 AsynchronousSocketListener.Send(handler, packet);
             },
             (string error) =>
@@ -36,7 +36,7 @@ namespace ChatServer.Server.Component
         {
             UserDAO.InsertUser(id, password, nickname, () =>
             {
-                string packet = "SignUpSuccessPacket;";
+                string packet = "SignUpSuccess;<EOF>";
                 AsynchronousSocketListener.Send(handler, packet);
             },
             (string error) =>

@@ -31,7 +31,7 @@ namespace ChatServer.Server.Component
                 var socketList = AsynchronousSocketListener.GetStateObject();
                 foreach(var socket in socketList)
                 {
-                    string packet = $"ReceiveMessage;{nickname};{content};";
+                    string packet = $"ReceiveMessage;{nickname};{content};<EOF>";
                     AsynchronousSocketListener.Send(socket.workSocket, packet);
                 }
             },

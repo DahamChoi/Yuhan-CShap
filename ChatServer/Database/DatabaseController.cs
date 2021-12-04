@@ -13,6 +13,16 @@ namespace ChatServer.Database
         private static readonly string _ConnetionString = "Server=localhost;Database=yuhan;Uid=root;Pwd=1234";
         private readonly MySqlConnection _Connetion = new MySqlConnection(_ConnetionString);
 
+        public DatabaseController()
+        {
+            _Connetion.Open();
+        }
+
+        ~DatabaseController()
+        {
+            _Connetion.Close();
+        }
+
         public void ExcuteQuery(string query)
         {
             MySqlCommand command = new MySqlCommand(query, _Connetion);

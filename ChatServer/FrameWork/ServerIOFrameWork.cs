@@ -159,6 +159,11 @@ namespace ChatServer.FrameWork
                             content.Length, content);
                         // Echo the data back to the client.  
                         // Send(handler, content);
+
+                        state = new StateObject();
+                        state.workSocket = handler;
+                        handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
+                        new AsyncCallback(ReadCallback), state);
                     }
                     else
                     {
@@ -190,9 +195,8 @@ namespace ChatServer.FrameWork
                     int bytesSent = handler.EndSend(ar);
                     Console.WriteLine("Sent {0} bytes to client.", bytesSent);
 
-                    handler.Shutdown(SocketShutdown.Both);
-                    handler.Close();
-
+                    //handler.Shutdown(SocketShutdown.Both);
+                    //handler.Close();
                 }
                 catch (Exception e)
                 {

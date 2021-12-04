@@ -54,7 +54,7 @@ namespace ChatServer.FrameWork
                         });
                     }
                 }
-                else if (top._Type == "class SelectCommand<User>")
+                else if (top._Type == "User")
                 {
                     var userSelectCommand = (SelectCommand<User>)top;
                     try
@@ -80,7 +80,7 @@ namespace ChatServer.FrameWork
                         });
                     }
                 }
-                else if (top._Type == "class SelectCommand<Message>")
+                else if (top._Type == "Message")
                 {
                     var messageSelectCommand = (SelectCommand<Message>)top;
                     try

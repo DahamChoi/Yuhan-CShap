@@ -48,7 +48,7 @@ namespace ChatServer.FrameWork
                         it.Login(top._Handler.workSocket, array[1], array[2]);
                     }
                 }
-                else if (array[0] == "SendMessage")
+                else if (array[0] == "SendMessagePacket")
                 {
                     foreach(var it in _MessageComponentList)
                     {

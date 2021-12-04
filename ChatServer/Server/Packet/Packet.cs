@@ -20,7 +20,7 @@ namespace ChatServer.Server.Packet
      *  -> Login;{id};{password};
      * 
      * LoginSuccessPacket
-     *  -> LoginSuccess;
+     *  -> LoginSuccess;{nickname};
      *  
      *  LoginFailPacket
      *   -> LoginFail;
